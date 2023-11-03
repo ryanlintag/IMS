@@ -67,5 +67,29 @@ namespace ArchitectureTests
             //Assert
             failingEntityTypes.Should().BeEmpty();
         }
+        [Fact]
+        public void EntityTypes_should_never_have_paramaterless_public_constructor()
+        {
+            //Arrange
+            var entityType = typeof(Entity);
+            var failingEntityTypes = new List<Type>();
+            var entityTypes = Types.InAssembly(DomainAssembly)
+                                    .That()
+                                    .Inherit(entityType)
+                                    .GetTypes();
+
+            //Act
+            foreach (var type in entityTypes)
+            {
+                var constructors = type.GetConstructors(BindingFlags.Instance | BindingFlags.Public);
+                if (constructors.Any(c => c.IsPublic && c.GetParameters().Length == 0))
+                {
+                    failingEntityTypes.Add(type);
+                }
+            }
+
+            //Assert
+            failingEntityTypes.Should().BeEmpty();
+        }
     }
 }
