@@ -2,11 +2,9 @@
 
 namespace Domain.Users
 {
-    public class User : Entity
+    public class User : AggregateRoot<UserId>
     {
-        public User(Guid id) : base(id)
-        {
-        }
         private User() { }
+
     }
 }
