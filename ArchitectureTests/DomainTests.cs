@@ -47,7 +47,7 @@ namespace ArchitectureTests
         public void EntityTypes_should_have_paramaterless_private_constructor()
         {
             //Arrange
-            var entityType = typeof(Entity);
+            var entityType = typeof(Entity<EntityId>);
             var failingEntityTypes = new List<Type>();
             var entityTypes = Types.InAssembly(DomainAssembly)
                                     .That()
@@ -71,7 +71,7 @@ namespace ArchitectureTests
         public void EntityTypes_should_never_have_paramaterless_public_constructor()
         {
             //Arrange
-            var entityType = typeof(Entity);
+            var entityType = typeof(Entity<EntityId>);
             var failingEntityTypes = new List<Type>();
             var entityTypes = Types.InAssembly(DomainAssembly)
                                     .That()
