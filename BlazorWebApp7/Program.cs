@@ -1,14 +1,27 @@
-using BlazorWebApp7.Data;
+using BlazorWebApp7;
+using Domain;
+using Application;
+using Presentation;
+using Infrastructure;
+using Persistance;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Carter;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddTelerikBlazor();
+
+builder.Services.AddDomain()
+                .AddApplication()
+                .AddPresentation()
+                .AddInfrastructure()
+                .AddPersistance();
+
+builder.Services.RegisterHttpClientServices();
 
 var app = builder.Build();
 
@@ -23,6 +36,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+
+app.MapCarter();
 
 app.UseRouting();
 

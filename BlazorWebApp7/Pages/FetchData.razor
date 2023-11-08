@@ -1,6 +1,7 @@
 ﻿@page "/fetchdata"
-@using BlazorWebApp7.Data
-@inject WeatherForecastService ForecastService
+@using BlazorWebApp7.Services;
+@using Presentation.Modules;
+@inject IService service;
 
 <PageTitle>Weather forecast</PageTitle>
 
@@ -38,10 +39,10 @@ else
 }
 
 @code {
-    private WeatherForecast[]? forecasts;
+    private IEnumerable<WeatherForecast> forecasts = new List<WeatherForecast>();
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await ForecastService.GetForecastAsync(DateOnly.FromDateTime(DateTime.Now));
+        forecasts = await service.GetService();
     }
 }
