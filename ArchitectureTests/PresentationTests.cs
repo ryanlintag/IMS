@@ -8,17 +8,38 @@ namespace ArchitectureTests
     public class PresentationTests
     {
         [Fact]
-        public void All_Presentation_Modules_should_inherit_from_IModule()
+        public void All_Presentation_Modules_should_inherit_from_ApiModule()
         {
             //Arrange
             var presentationAssembly = typeof(Presentation.AssemblyReference).Assembly;
             var moduleNamespace = "Presentation.Modules";
+            var apiModuleName = typeof(ApiModule);
+
+            //Act
+            var result = Types.InAssembly(presentationAssembly)
+                            .That()
+                            .ResideInNamespaceStartingWith(moduleNamespace)
+                            .Should()
+                            .Inherit(apiModuleName)
+                            .GetResult();
+
+            //Assert
+            result.IsSuccessful.Should().BeTrue();
+        }
+        [Fact]
+        public void ApiModule_should_inherit_from_IModule()
+        {
+            //Arrange
+            var presentationAssembly = typeof(Presentation.AssemblyReference).Assembly;
+            var moduleNamespace = "Presentation";
             var IModuleInterfaceName = typeof(IModule);
 
             //Act
             var result = Types.InAssembly(presentationAssembly)
                             .That()
                             .ResideInNamespaceStartingWith(moduleNamespace)
+                            .And()
+                            .HaveNameMatching("ApiModule")
                             .Should()
                             .ImplementInterface(IModuleInterfaceName)
                             .GetResult();
