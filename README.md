@@ -1,4 +1,4 @@
-# blazor-wasm
+# blazor-server
 
 My test project using blazor as front-end in a clean architecture
 
