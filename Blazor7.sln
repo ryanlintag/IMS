@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "Presentatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchitectureTests", "ArchitectureTests\ArchitectureTests.csproj", "{39A869BE-D388-486B-9AAC-EC29FF8A1775}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebApp7", "BlazorWebApp7\BlazorWebApp7.csproj", "{5617DE21-B86B-4061-BD57-4681F7D88E0D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{39A869BE-D388-486B-9AAC-EC29FF8A1775}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39A869BE-D388-486B-9AAC-EC29FF8A1775}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39A869BE-D388-486B-9AAC-EC29FF8A1775}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5617DE21-B86B-4061-BD57-4681F7D88E0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5617DE21-B86B-4061-BD57-4681F7D88E0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5617DE21-B86B-4061-BD57-4681F7D88E0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5617DE21-B86B-4061-BD57-4681F7D88E0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{6AD7BD71-C182-4AEB-AC9C-D7440A5F123C} = {65C12BEB-1971-440C-9392-4010C2BD5D45}
 		{2C0ED8BD-77EF-473D-9304-13D130337770} = {65C12BEB-1971-440C-9392-4010C2BD5D45}
 		{39A869BE-D388-486B-9AAC-EC29FF8A1775} = {4F99F2B1-5E6E-44B9-9BD9-64600769BFFE}
+		{5617DE21-B86B-4061-BD57-4681F7D88E0D} = {9704F57B-5558-4479-9B01-A8FD4BB49D7D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8EF3BDC6-E546-4514-AD7D-AE0A708DEB08}
