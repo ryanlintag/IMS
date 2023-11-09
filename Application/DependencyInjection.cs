@@ -7,6 +7,7 @@ namespace Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             var assembly = typeof(DependencyInjection).Assembly;
+            services.AddMediator(options => options.ServiceLifetime = ServiceLifetime.Transient);
             return services;
         }
     }

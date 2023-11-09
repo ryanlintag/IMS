@@ -1,4 +1,6 @@
-﻿using Presentation.Modules;
+﻿using Application;
+using Application.Users.Queries;
+using Presentation.Modules;
 
 namespace BlazorWebApp7.Services
 {
@@ -9,12 +11,12 @@ namespace BlazorWebApp7.Services
         {
             this._httpClient = httpClient;
         }
-        public async Task<IEnumerable<WeatherForecast>> GetService()
+        public async Task<PagedList<UserRecord>> GetService()
         {
-            var l = await _httpClient.GetFromJsonAsync<WeatherForecast[]>("users");
+            var l = await _httpClient.GetFromJsonAsync<PagedList<UserRecord>>("users");
             if (l == null)
             {
-                return new List<WeatherForecast>();
+                return new PagedList<UserRecord>();
             }
             return l;
         }
