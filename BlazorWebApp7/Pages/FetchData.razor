@@ -1,7 +1,7 @@
 ﻿@page "/fetchdata"
 @using BlazorWebApp7.Services;
 @using Presentation.Modules;
-@inject IService service;
+@inject IBlazorClientService service;
 
 <PageTitle>Weather forecast</PageTitle>
 
@@ -9,7 +9,7 @@
 
 <p>This component demonstrates fetching data from a service.</p>
 
-@if (forecasts == null)
+@if (false)
 {
     <p><em>Loading...</em></p>
 }
@@ -25,7 +25,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @* @foreach (var forecast in forecasts)
             {
                 <tr>
                     <td>@forecast.Date.ToShortDateString()</td>
@@ -33,16 +33,15 @@ else
                     <td>@forecast.TemperatureF</td>
                     <td>@forecast.Summary</td>
                 </tr>
-            }
+            } *@
         </tbody>
     </table>
 }
 
 @code {
-    private IEnumerable<WeatherForecast> forecasts = new List<WeatherForecast>();
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await service.GetService();
+        var x = await service.GetService();
     }
 }
