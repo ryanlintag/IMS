@@ -1,14 +1,11 @@
 ﻿using Presentation.Modules;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
 
 namespace BlazorWebApp7.Services
 {
-    public sealed class Service : IService
+    public sealed class BlazorClientService : IBlazorClientService
     {
         private readonly HttpClient _httpClient;
-        public Service(HttpClient httpClient)
+        public BlazorClientService(HttpClient httpClient)
         {
             this._httpClient = httpClient;
         }

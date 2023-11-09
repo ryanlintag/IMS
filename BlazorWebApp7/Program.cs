@@ -10,6 +10,9 @@ using Carter;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//builder.Configuration.Sources.Clear();
+//builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
@@ -21,7 +24,7 @@ builder.Services.AddDomain()
                 .AddInfrastructure()
                 .AddPersistance();
 
-builder.Services.RegisterHttpClientServices();
+builder.Services.RegisterHttpClientServices(builder.Configuration);
 
 var app = builder.Build();
 

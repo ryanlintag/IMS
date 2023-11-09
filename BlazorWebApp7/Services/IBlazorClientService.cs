@@ -2,7 +2,8 @@
 
 namespace BlazorWebApp7.Services
 {
-    public interface IService
+    public interface IBlazorClientService
+
     {
         Task<IEnumerable<WeatherForecast>> GetService();
     }
