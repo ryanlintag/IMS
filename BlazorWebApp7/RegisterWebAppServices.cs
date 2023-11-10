@@ -1,4 +1,5 @@
 ﻿using BlazorWebApp7.Services;
+using Presentation.Authorization;
 
 namespace BlazorWebApp7
 {
@@ -8,11 +9,13 @@ namespace BlazorWebApp7
         {
             HttpClientSettings settings = new();
             configuration.GetSection(nameof(HttpClientSettings)).Bind(settings);
+            var apiKey = configuration.GetSection(ApiKeyConstants.AuthorizationSection).Value;
 
             //This will be the default code base for setting api
             services.AddHttpClient<IBlazorClientService, BlazorClientService>((client) =>
             {
                 client.BaseAddress = new Uri(settings.BaseAddress);
+                client.DefaultRequestHeaders.Add(ApiKeyConstants.AuthorizationHeaderName, apiKey);
             })
             .ConfigurePrimaryHttpMessageHandler(() => 
             {
