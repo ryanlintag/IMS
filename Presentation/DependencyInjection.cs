@@ -1,5 +1,6 @@
 ﻿using Carter;
 using Microsoft.Extensions.DependencyInjection;
+using Presentation.Authorization;
 
 namespace Presentation
 {
@@ -8,6 +9,7 @@ namespace Presentation
         public static IServiceCollection AddPresentation(this IServiceCollection services)
         {
             var assembly = typeof(DependencyInjection).Assembly;
+
             services.AddCarter();
             return services;
         }
