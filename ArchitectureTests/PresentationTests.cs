@@ -8,51 +8,30 @@ namespace ArchitectureTests
     public class PresentationTests
     {
         [Fact]
-        public void All_Presentation_Modules_should_inherit_from_ApiModule()
+        public void All_Presentation_EnpointDefinitions_should_inherit_from_IEndpointDefinitions()
         {
             //Arrange
             var presentationAssembly = typeof(Presentation.AssemblyReference).Assembly;
-            var moduleNamespace = "Presentation.Modules";
-            var apiModuleName = typeof(ApiModule);
+            var moduleNamespace = "Presentation.EndpointDefinitions";
+            var endpointDefinitionInterface = typeof(IEndpointDefinition);
 
             //Act
             var result = Types.InAssembly(presentationAssembly)
                             .That()
                             .ResideInNamespaceStartingWith(moduleNamespace)
                             .Should()
-                            .Inherit(apiModuleName)
+                            .ImplementInterface(endpointDefinitionInterface)
                             .GetResult();
 
             //Assert
             result.IsSuccessful.Should().BeTrue();
         }
         [Fact]
-        public void ApiModule_should_inherit_from_IModule()
+        public void All_Presentation_EnpointDefinitions_should_be_sealed_and_public()
         {
             //Arrange
             var presentationAssembly = typeof(Presentation.AssemblyReference).Assembly;
-            var moduleNamespace = "Presentation";
-            var IModuleInterfaceName = typeof(IModule);
-
-            //Act
-            var result = Types.InAssembly(presentationAssembly)
-                            .That()
-                            .ResideInNamespaceStartingWith(moduleNamespace)
-                            .And()
-                            .HaveNameMatching("ApiModule")
-                            .Should()
-                            .ImplementInterface(IModuleInterfaceName)
-                            .GetResult();
-
-            //Assert
-            result.IsSuccessful.Should().BeTrue();
-        }
-        [Fact]
-        public void All_Presentation_Modules_that_inherit_from_IModule_should_be_sealed_and_public()
-        {
-            //Arrange
-            var presentationAssembly = typeof(Presentation.AssemblyReference).Assembly;
-            var moduleNamespace = "Presentation.Modules";
+            var moduleNamespace = "Presentation.EndpointDefinitions";
 
             //Act
             var result = Types.InAssembly(presentationAssembly)
@@ -68,13 +47,13 @@ namespace ArchitectureTests
             result.IsSuccessful.Should().BeTrue();
         }
         [Fact]
-        public void All_Presentation_Modules_that_inherit_from_IModule_should_end_in_Module_name()
+        public void All_Presentation_EnpointDefinitions_that_inherit_from_IEnpointDefinitions_should_end_in_EnpointDefinition_name()
         {
             //Arrange
             var presentationAssembly = typeof(Presentation.AssemblyReference).Assembly;
-            var moduleNamespace = "Presentation.Modules";
-            var IModuleInterfaceName = typeof(IModule);
-            var modulePostName = "Module";
+            var moduleNamespace = "Presentation.EndpointDefinitions";
+            var IModuleInterfaceName = typeof(IEndpointDefinition);
+            var endpointDefinitionPostName = "EndpointDefinition";
 
             //Act
             var result = Types.InAssembly(presentationAssembly)
@@ -83,7 +62,7 @@ namespace ArchitectureTests
                             .And()
                             .ImplementInterface(IModuleInterfaceName)
                             .Should()
-                            .HaveNameEndingWith(modulePostName)
+                            .HaveNameEndingWith(endpointDefinitionPostName)
                             .GetResult();
 
             //Assert
