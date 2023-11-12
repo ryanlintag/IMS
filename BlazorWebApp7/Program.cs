@@ -20,6 +20,8 @@ builder.Services.AddDomain()
 
 builder.Services.RegisterHttpClientServices(builder.Configuration);
 
+builder.BuildPresentationHost();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
