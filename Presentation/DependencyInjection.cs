@@ -1,11 +1,18 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Presentation.Authorization;
+using Serilog;
 
 namespace Presentation
 {
     public static class DependencyInjection
     {
+        public static WebApplicationBuilder BuildPresentationHost(this WebApplicationBuilder builder)
+        {
+            if(builder is null) throw new ArgumentNullException(nameof(builder));
+            builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
+            return builder;
+        }
         public static IServiceCollection AddPresentation(this IServiceCollection services)
         {
             services.AddEndpointDefinitions(typeof(DependencyInjection));
