@@ -3,6 +3,7 @@
 My test project using blazor as front-end in a clean architecture
 
 This project will be using Blazor 7
+2023-11-14 : The project will be updated to use .net 8
 
 List of libraries implemented in this repository
 1. FluentAssertions
