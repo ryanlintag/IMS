@@ -41,5 +41,23 @@ namespace ArchitectureTests
             //Assert
             result.IsSuccessful.Should().BeTrue();
         }
+        [Fact]
+        public void IRepository_interfaces_inside_Repositories_Folder_should_end_in_RepositoryName()
+        {
+            //Arrange
+            var assembly = typeof(Application.AssemblyReference).Assembly;
+            var nameSpace = "Application.Repositories";
+            //Act
+            var result = Types.InAssembly(assembly)
+                    .That()
+                    .ResideInNamespace(nameSpace)
+                    .Should()
+                    .BeInterfaces()
+                    .And()
+                    .HaveNameEndingWith("Repository", StringComparison.Ordinal)
+                    .GetResult();
+            //Assert
+            result.IsSuccessful.Should().BeTrue();
+        }
     }
 }
