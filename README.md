@@ -18,12 +18,12 @@ This project is initially set as a study project that would help me understand a
 3. Event Sourcing
 
 # Project Status:
-This project will be using Blazor 8
-2023-11-14 : The project will be updated to use .net 8
-2023-11-18 : Working on EventStore implementation using SQL Server and EntityFrameworkCore
+* This project will be using Blazor 8
+* **2023-11-14** : The project will be updated to use .net 8
+* **2023-11-18** : Working on EventStore implementation using SQL Server and EntityFrameworkCore
 
 I would like to thank the following people for the tutorials and concepts that they provide in their own channels. Please do follow them and I hope that they can help you too with the knowledge that they impart.
-1. Milan Jovanović - https://www.youtube.com/@MilanJovanovicTech
-2. IAmTimCorey - https://www.youtube.com/@IAmTimCorey
-3. Nick Chapsas - https://www.youtube.com/@nickchapsas
-4. Derek Comartin - https://www.youtube.com/@CodeOpinion
+1. [Milan Jovanović](https://www.youtube.com/@MilanJovanovicTech)
+2. [IAmTimCorey](https://www.youtube.com/@IAmTimCorey)
+3. [Nick Chapsas]( https://www.youtube.com/@nickchapsas)
+4. [Derek Comartin](https://www.youtube.com/@CodeOpinion)
