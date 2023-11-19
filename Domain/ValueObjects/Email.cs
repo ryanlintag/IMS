@@ -4,7 +4,7 @@ namespace Domain.ValueObjects
 {
     public record Email
     {
-        public string Address { get; private set; } = string.Empty;
+        private Email() { }
         public Email(string address)
         {
             if (!isValid(address))
@@ -13,6 +13,7 @@ namespace Domain.ValueObjects
             }
             this.Address = address;
         }
+        public string Address { get; private set; } = string.Empty;
 
         private bool isValid(string address)
         {
