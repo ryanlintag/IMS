@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.DbContexts
+namespace Persistance.DbContexts
 {
     public static class InMemoryDatabaseSetting
     {

@@ -3,14 +3,22 @@ using Domain.ValueObjects;
 
 namespace Domain.Users.Events
 {
-    public record UserActivatedEvent : UserEvent
+    public record UserActivatedEvent : UserBaseEvent
     {
-        public UserActivatedEvent(UpdatedByUser activatedBy, DateTime dateUpdated) : base(dateUpdated)
+        private UpdatedByUser _updatedByUser { get; set; }
+        public UserActivatedEvent(string activatedBy, DateTime dateUpdated) : base(dateUpdated)
         {
+            this._updatedByUser = new UpdatedByUser(new Email(activatedBy));
             this.ActivatedBy = activatedBy;
         }
-        public bool IsActivated { get { return true; } }
-        public UpdatedByUser ActivatedBy { get; private set; }
+        //This is only added here for readability purposes.
+        public const bool IsActivated = true;
+        public string ActivatedBy { get; private set; }
 
+        public override void Apply(User user)
+        {
+            if(user == null) { throw new DomainException("Null user passed to UserActivatedEvent"); }
+            user.Activate(this._updatedByUser, this.UpdatedDate);
+        }
     }
 }

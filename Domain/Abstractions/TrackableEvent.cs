@@ -1,16 +1,16 @@
-﻿using Newtonsoft.Json;
-
-namespace Domain.Abstractions
+﻿namespace Domain.Abstractions
 {
     public class TrackableEvent<T> where T : IDomainEvent
     {
-        private TrackableEvent() { }
-        protected TrackableEvent(Int64 version, T jsonData)
+        protected TrackableEvent() { }
+        public TrackableEvent(EntityId id, Int64 version, T evt)
         {
+            this.StreamId = id;
             this.Version = version;
             this.EventType = typeof(T).ToString();
-            this.JsonData = JsonConvert.SerializeObject(jsonData);
+            this.JsonData = evt.ToJsonString();
         }
+        public EntityId StreamId { get; private set; }
         public Int64 Version { get; private set; }
         public string EventType { get; private set; }
         public string JsonData { get; private set; }
