@@ -1,4 +1,4 @@
-# Blazor-CQRS-EventSourcing-EntityFramework-Template
+### Blazor-CQRS-EventSourcing-EntityFramework-Template
 
 This project is initially set as a study project that would help me understand and implement software development concepts stemming from the Domain-Driven-Design software development approach. My desire is for this project to be of help to others in faster learning Domain Driven Design and other concepts that I have been studying since its conceptualization. I hope that this can be a template that you can use to initialize your personal project. Cheers! 
 
@@ -27,3 +27,6 @@ I would like to thank the following people for the tutorials and concepts that t
 2. [IAmTimCorey](https://www.youtube.com/@IAmTimCorey)
 3. [Nick Chapsas]( https://www.youtube.com/@nickchapsas)
 4. [Derek Comartin](https://www.youtube.com/@CodeOpinion)
+
+#Lessons and pain points while developing this project
+*2023-11-21*:  I tried using EFCore 8 for Event Sourcing. After finishing the models and such, it seems to me that the final projection should always be a separate table from the events. The events data on the other hand looks like will be a slower version implementation than that when using Marten and Postgres. Maybe when this project is finished, I'll work on a version of which will use Postgres as backend.
