@@ -28,5 +28,5 @@ I would like to thank the following people for the tutorials and concepts that t
 3. [Nick Chapsas]( https://www.youtube.com/@nickchapsas)
 4. [Derek Comartin](https://www.youtube.com/@CodeOpinion)
 
-#Lessons and pain points while developing this project
+# Lessons and pain points while developing this project
 *2023-11-21*:  I tried using EFCore 8 for Event Sourcing. After finishing the models and such, it seems to me that the final projection should always be a separate table from the events. The events data on the other hand looks like will be a slower version implementation than that when using Marten and Postgres. Maybe when this project is finished, I'll work on a version of which will use Postgres as backend.
