@@ -1,11 +1,12 @@
 ﻿using Domain.Abstractions;
+using Domain.Users.Events;
 using Domain.ValueObjects;
 
 namespace Domain.Users
 {
     public class User : AggregateRoot<UserId>
     {
-        public User(UserId userId, Email email, Name name, Role role, bool isActive, UpdatedByUser updatedByUser, DateTime dateLastUpdated, UserDetails userDetails)
+        public User(UserId userId, Email email, Name name, Role role, bool isActive, UpdatedByUser updatedByUser, DateTime dateLastUpdated)
         {
             this.Id = userId;
             this.Email = email;
@@ -14,7 +15,6 @@ namespace Domain.Users
             this.IsActive = isActive;
             this.UpdatedByUser = updatedByUser;
             this.DateLastUpdated = dateLastUpdated;
-            this.UserDetails = userDetails;
         }
         public Email Email { get; private set; }
         public Name Name { get; private set; }
@@ -22,23 +22,34 @@ namespace Domain.Users
         public bool IsActive { get; private set; }
         public UpdatedByUser UpdatedByUser { get; private set; }
         public DateTime DateLastUpdated { get; private set; }
-        public UserDetails UserDetails { get; private set; }
         #pragma warning disable CS8618
         private User() { }
-        #pragma warning restore CS8618
+#pragma warning restore CS8618
+
+        public void Activate(UpdatedByUser updatedByUser, DateTime activatedDate)
+        {
+            this.IsActive = true;
+            this.DateLastUpdated = activatedDate;
+            this.UpdatedByUser = updatedByUser;
+        }
+        public void Deactivate(UpdatedByUser updatedByUser, DateTime deactivatedDate)
+        {
+            this.IsActive = false;
+            this.DateLastUpdated = deactivatedDate;
+            this.UpdatedByUser = updatedByUser;
+        }
     }
 
-    public class UserDetails
+    public class UserDomainEvent : TrackableEvent<UserBaseEvent>
     {
-        private UserDetails() { }
-        public UserDetails(UpdatedByUser createdBy, DateTime dateCreated, List<TrackableEvent<UserEvent>> events)
+        private UserDomainEvent() { }
+        public UserDomainEvent(UserDomainId id, UserId userId, long version, UserBaseEvent evt) : base(userId, version, evt)
         {
-            this.CreatedBy = createdBy;
-            this.DateCreated = dateCreated;
-            this.Events = events;
+            this.Id = id;
         }
-        public UpdatedByUser CreatedBy {  get; private set; }
-        public DateTime DateCreated { get; private set; }
-        public List<TrackableEvent<UserEvent>> Events { get; private set; }    
+        public UserDomainId Id { get; set; }
+
     }
+
+    public record UserDomainId(Guid id) : EntityId(id);
 }
