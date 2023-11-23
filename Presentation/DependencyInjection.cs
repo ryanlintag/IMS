@@ -9,7 +9,7 @@ namespace Presentation
     {
         public static WebApplicationBuilder BuildPresentationHost(this WebApplicationBuilder builder)
         {
-            if(builder is null) throw new ArgumentNullException(nameof(builder));
+            ArgumentNullException.ThrowIfNull(builder);
             builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
             return builder;
         }

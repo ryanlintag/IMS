@@ -9,8 +9,8 @@ namespace Persistance.DbContexts
 
         private static DbContextOptions<AppDbContext> sqlLiteDbContextOption = new DbContextOptionsBuilder<AppDbContext>()
                 .UseSqlite($"Data Source={DbPath}")
-                .EnableSensitiveDataLogging(true)
-                .LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information)
+                //.EnableSensitiveDataLogging(true)
+                //.LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information)
                 .Options;
 
         public static DbContextOptions<AppDbContext> SqlLiteDbContextOption { get { return sqlLiteDbContextOption; } }

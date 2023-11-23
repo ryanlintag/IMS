@@ -2,9 +2,10 @@
 
 namespace Application.Repositories
 {
-    public interface IUserRepository
+    public interface IUserRepository : IRepository
     {
         Task Update(User user);
-        Task Crete(User user);
+        bool UserExists(string address);
+        Task CreateNewUser(User user);
     }
 }
