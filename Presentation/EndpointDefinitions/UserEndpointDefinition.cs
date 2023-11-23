@@ -1,9 +1,10 @@
-﻿using Application.Users.Queries;
+﻿using Application.Users.Commands;
+using Application.Users.Queries;
 using Mediator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Presentation.Authorization;
 
 namespace Presentation.EndpointDefinitions
 {
@@ -18,6 +19,8 @@ namespace Presentation.EndpointDefinitions
                 var res = await sender.Send(q);
                 return res;
             });
+
+            app.MapPost(basePattern, CreateUser);
         }
 
         public void DefineServices(IServiceCollection services)
@@ -25,5 +28,11 @@ namespace Presentation.EndpointDefinitions
 
         }
 
-    }
+        public async Task<IResult> CreateUser(ISender sender, [FromBody] CreateUserRequestCommand request)
+        {
+            var result = await sender.Send(request);
+            return Results.Ok();
+        }
+
+}
 }

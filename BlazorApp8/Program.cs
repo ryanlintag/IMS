@@ -5,6 +5,11 @@ using Presentation;
 using Infrastructure;
 using Persistance;
 using BlazorApp8;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Persistance.DbContexts;
+using Domain.Users;
+using Domain.ValueObjects;
+using Domain.Users.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,5 +46,8 @@ app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
 app.UsePresentation();
+
+
+DbInitialize.Initialize(app);
 
 app.Run();
