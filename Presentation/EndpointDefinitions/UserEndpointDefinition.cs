@@ -31,7 +31,14 @@ namespace Presentation.EndpointDefinitions
         public async Task<IResult> CreateUser(ISender sender, [FromBody] CreateUserRequestCommand request)
         {
             var result = await sender.Send(request);
-            return Results.Ok();
+            if(result.IsSuccess)
+            {
+                return Results.Ok();
+            }
+            else
+            {
+                return Results.BadRequest(result.Error);
+            }
         }
 
 }
