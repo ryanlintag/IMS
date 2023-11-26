@@ -34,9 +34,11 @@ namespace Presentation.EndpointDefinitions
 
         }
 
-        public async Task<IResult> CreateUser(ISender sender, [FromBody] CreateUserRequestCommand request)
+        public async Task<IResult> CreateUser(ISender sender, [FromBody] CreateUserRequest request)
         {
-            var result = await sender.Send(request);
+            var updatedBy = "ryanlintag@gmail.com";
+            var createRequest = new CreateUserRequestCommand(request.email, request.firstName, request.middleName, request.lastName, request.role, updatedBy);
+            var result = await sender.Send(createRequest);
             if(result.IsSuccess)
             {
                 return Results.Ok();
