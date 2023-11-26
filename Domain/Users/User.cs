@@ -38,6 +38,16 @@ namespace Domain.Users
             this.DateLastUpdated = deactivatedDate;
             this.UpdatedByUser = updatedByUser;
         }
+
+        public void UpdateDetails(Email email, Name name, Role role, bool isActive, UpdatedByUser updatedBy)
+        {
+            this.Email = email;
+            this.Name = name;
+            this.Role = role;
+            this.IsActive = isActive;
+            this.UpdatedByUser = updatedBy;
+            this.DateLastUpdated = DateTime.UtcNow;
+        }
     }
 
     public class UserDomainEvent : TrackableEvent<UserBaseEvent>

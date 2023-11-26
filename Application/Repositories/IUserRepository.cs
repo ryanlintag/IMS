@@ -1,4 +1,5 @@
 ﻿using Domain.Users;
+using Domain.ValueObjects;
 
 namespace Application.Repositories
 {
@@ -7,5 +8,7 @@ namespace Application.Repositories
         Task Update(User user);
         bool UserExists(string address);
         Task CreateNewUser(User user);
+        Task<User> GetUserById(UserId userId);
+        Task<User> GetUserByEmail(Email email);
     }
 }
