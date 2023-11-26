@@ -1,6 +1,7 @@
 ﻿using Application.Users.Commands;
 using Application.Users.Queries;
 using Domain.Users;
+using Domain.Users.Events;
 using Mediator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -24,6 +25,8 @@ namespace Presentation.EndpointDefinitions
 
             app.MapPost(basePattern, CreateUser);
             app.MapPut(basePattern + "/{userId}", UpdateUser);
+            app.MapPatch(basePattern + "/{userId}/activate", ActivateUser);
+            app.MapPatch(basePattern + "/{userId}/deactivate", DeactivateUser);
         }
 
         public void DefineServices(IServiceCollection services)
@@ -54,6 +57,34 @@ namespace Presentation.EndpointDefinitions
                 return Results.Ok();
             }
             else 
+            {
+                return Results.BadRequest(result.Error);
+            }
+        }
+        public async Task<IResult> ActivateUser(HttpContext context, ISender sender, [FromRoute] Guid userId)
+        {
+            var updatedBy = "ryanlintag@gmail.com";
+            var activateRequest = new ActivateUserRequestCommand(userId, updatedBy);
+            var result = await sender.Send(activateRequest);
+            if (result.IsSuccess)
+            {
+                return Results.Ok();
+            }
+            else
+            {
+                return Results.BadRequest(result.Error);
+            }
+        }
+        public async Task<IResult> DeactivateUser(HttpContext context, ISender sender, [FromRoute] Guid userId)
+        {
+            var updatedBy = "ryanlintag@gmail.com";
+            var deactivateRequest = new DeactivateUserRequestCommand(userId, updatedBy);
+            var result = await sender.Send(deactivateRequest);
+            if (result.IsSuccess)
+            {
+                return Results.Ok();
+            }
+            else
             {
                 return Results.BadRequest(result.Error);
             }
