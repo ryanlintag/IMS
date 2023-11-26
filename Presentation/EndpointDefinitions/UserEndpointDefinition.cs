@@ -1,10 +1,12 @@
 ﻿using Application.Users.Commands;
 using Application.Users.Queries;
+using Domain.Users;
 using Mediator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Presentation.RequestModels.Users;
 
 namespace Presentation.EndpointDefinitions
 {
@@ -21,6 +23,7 @@ namespace Presentation.EndpointDefinitions
             });
 
             app.MapPost(basePattern, CreateUser);
+            app.MapPut(basePattern + "/{userId}", UpdateUser);
         }
 
         public void DefineServices(IServiceCollection services)
@@ -40,6 +43,20 @@ namespace Presentation.EndpointDefinitions
                 return Results.BadRequest(result.Error);
             }
         }
-
-}
+        public async Task<IResult> UpdateUser(HttpContext context, ISender sender, [FromRoute] Guid userId, [FromBody] UpdateUserRequest request)
+        {
+            //var updatedBy = context.User.Identity.Name;
+            var updatedBy = "ryanlintag@gmail.com";
+            var updateCommand = new UpdateUserRequestCommand(userId, request.email, request.firstName, request.lastName, request.middleName, request.role, request.isActive, updatedBy);
+            var result = await sender.Send(updateCommand);
+            if(result.IsSuccess)
+            {
+                return Results.Ok();
+            }
+            else 
+            {
+                return Results.BadRequest(result.Error);
+            }
+        }
+    }
 }
