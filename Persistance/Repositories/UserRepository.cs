@@ -71,5 +71,30 @@ namespace Persistance.Repositories
         {
             return await this._dbContext.Users.FirstOrDefaultAsync(p => p.Email == email);
         }
+
+        public async Task ActivateUser(User user)
+        {
+            this._dbContext.Entry<User>(user).State = EntityState.Modified;
+
+            var userActivatedEvent = new UserActivatedEvent(user.UpdatedByUser.Email.Address, user.DateLastUpdated);
+
+            var lastVersion = await this._dbContext.UserEvents.Where(p => p.StreamId == user.Id).MaxAsync(p => p.Version);
+
+            var userEvent = new UserDomainEvent(new UserDomainId(Guid.NewGuid()), user.Id, lastVersion + 1, userActivatedEvent);
+            await this._dbContext.UserEvents.AddAsync(userEvent);
+        }
+
+        public async Task DeactivateUser(User user)
+        {
+            this._dbContext.Entry<User>(user).State = EntityState.Modified;
+
+            var userDeactivatedEvent = new UserDeactivatedEvent(user.UpdatedByUser.Email.Address, user.DateLastUpdated);
+
+            var lastVersion = await this._dbContext.UserEvents.Where(p => p.StreamId == user.Id).MaxAsync(p => p.Version);
+
+            var userEvent = new UserDomainEvent(new UserDomainId(Guid.NewGuid()), user.Id, lastVersion + 1, userDeactivatedEvent);
+            await this._dbContext.UserEvents.AddAsync(userEvent);
+
+        }
     }
 }

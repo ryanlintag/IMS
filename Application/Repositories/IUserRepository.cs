@@ -10,5 +10,7 @@ namespace Application.Repositories
         Task CreateNewUser(User user);
         Task<User> GetUserById(UserId userId);
         Task<User> GetUserByEmail(Email email);
+        Task ActivateUser(User user);
+        Task DeactivateUser(User user);
     }
 }
