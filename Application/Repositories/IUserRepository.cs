@@ -12,5 +12,12 @@ namespace Application.Repositories
         Task<User> GetUserByEmail(Email email);
         Task ActivateUser(User user);
         Task DeactivateUser(User user);
+        Task<PagedList<UserRecord>> GetUsers(
+                string searchValue, 
+                int currentPage, 
+                int itemsPerPage, 
+                string orderByProperty, 
+                SortOrder sortOrder, 
+                CancellationToken cancellationToken);
     }
 }

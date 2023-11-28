@@ -1,5 +1,5 @@
 ﻿using Application;
-using Application.Users.Queries;
+using Domain.Users;
 
 namespace BlazorApp8.Services
 {
