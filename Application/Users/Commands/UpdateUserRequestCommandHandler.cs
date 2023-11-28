@@ -32,7 +32,7 @@ namespace Application.Users.Commands
                 {
                     return DomainResult.Failure(new DomainError("User.UpdateUserRequestCommandHandler", "Email is already used by another user"));
                 }
-                var name = new Name(command.firstName, command.lastName, command.lastName);
+                var name = new Name(command.lastName, command.firstName, command.middleName);
                 var role = new Role(command.role);
                 var updatedBy = new UpdatedByUser(new Email(command.updatedBy));
                 user.UpdateDetails(email, name, role, command.isActive, updatedBy);

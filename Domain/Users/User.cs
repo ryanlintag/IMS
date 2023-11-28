@@ -21,7 +21,7 @@ namespace Domain.Users
         public bool IsActive { get; private set; }
         public UpdatedByUser UpdatedByUser { get; private set; }
         public DateTime DateLastUpdated { get; private set; }
-        #pragma warning disable CS8618
+#pragma warning disable CS8618
         private User() { }
 #pragma warning restore CS8618
 

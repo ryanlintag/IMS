@@ -14,7 +14,6 @@ namespace Domain.ValueObjects
             this.Address = address;
         }
         public string Address { get; private set; } = string.Empty;
-
         private bool isValid(string address)
         {
             return MailAddress.TryCreate(address, out _);

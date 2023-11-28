@@ -1,5 +1,6 @@
 ﻿using Application;
 using Application.Users.Queries;
+using Domain.Users;
 
 namespace BlazorApp8.Services
 {
@@ -15,9 +16,14 @@ namespace BlazorApp8.Services
             var l = await _httpClient.GetFromJsonAsync<PagedList<UserRecord>>("users");
             if (l == null)
             {
-                return new PagedList<UserRecord>();
+                return new PagedList<UserRecord>(new List<UserRecord>(), 1, 1, 1, "", "",new SortOrder(""));
             }
             return l;
+        }
+
+        Task<PagedList<UserRecord>> IBlazorClientService.GetService()
+        {
+            throw new NotImplementedException();
         }
     }
 }

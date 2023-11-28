@@ -1,4 +1,5 @@
-﻿using Application.Users.Commands;
+﻿using Application;
+using Application.Users.Commands;
 using Application.Users.Queries;
 using Domain.Users;
 using Domain.Users.Events;
@@ -16,12 +17,7 @@ namespace Presentation.EndpointDefinitions
         private readonly string basePattern = "/users";
         public void DefineEndpoints(WebApplication app)
         {
-            app.MapGet(basePattern, async (ISender sender) =>
-            {
-                var q = new GetUsersQuery("", 1, 1, "", "");
-                var res = await sender.Send(q);
-                return res;
-            });
+            app.MapGet(basePattern, GetUsers);
 
             app.MapPost(basePattern, CreateUser);
             app.MapPut(basePattern + "/{userId}", UpdateUser);
@@ -34,6 +30,17 @@ namespace Presentation.EndpointDefinitions
 
         }
 
+        public async Task<PagedList<UserRecord>> GetUsers(ISender sender, 
+            [FromQuery] string? searchValue, 
+            [FromQuery] int? page, 
+            [FromQuery] int? pageSize, 
+            [FromQuery] string? orderBy, 
+            [FromQuery] string? orderType)
+        {
+            var query = new GetUsersQuery(searchValue, page, pageSize, orderBy, orderType);
+            var result = await sender.Send(query);
+            return result;
+        }
         public async Task<IResult> CreateUser(ISender sender, [FromBody] CreateUserRequest request)
         {
             var updatedBy = "ryanlintag@gmail.com";
