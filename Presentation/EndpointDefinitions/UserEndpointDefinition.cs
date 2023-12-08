@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Presentation.Infrastructure;
 using Presentation.RequestModels.Users;
 
 namespace Presentation.EndpointDefinitions
@@ -18,7 +19,6 @@ namespace Presentation.EndpointDefinitions
         public void DefineEndpoints(WebApplication app)
         {
             app.MapGet(basePattern, GetUsers);
-
             app.MapPost(basePattern, CreateUser);
             app.MapPut(basePattern + "/{userId}", UpdateUser);
             app.MapPatch(basePattern + "/{userId}/activate", ActivateUser);
@@ -52,7 +52,7 @@ namespace Presentation.EndpointDefinitions
             }
             else
             {
-                return Results.BadRequest(result.Error);
+                return result.ToProblemDetails();
             }
         }
         public async Task<IResult> UpdateUser(HttpContext context, ISender sender, [FromRoute] Guid userId, [FromBody] UpdateUserRequest request)
@@ -67,7 +67,7 @@ namespace Presentation.EndpointDefinitions
             }
             else 
             {
-                return Results.BadRequest(result.Error);
+                return result.ToProblemDetails();
             }
         }
         public async Task<IResult> ActivateUser(HttpContext context, ISender sender, [FromRoute] Guid userId)
@@ -81,7 +81,7 @@ namespace Presentation.EndpointDefinitions
             }
             else
             {
-                return Results.BadRequest(result.Error);
+                return result.ToProblemDetails();
             }
         }
         public async Task<IResult> DeactivateUser(HttpContext context, ISender sender, [FromRoute] Guid userId)
@@ -95,7 +95,7 @@ namespace Presentation.EndpointDefinitions
             }
             else
             {
-                return Results.BadRequest(result.Error);
+                return result.ToProblemDetails();
             }
         }
     }

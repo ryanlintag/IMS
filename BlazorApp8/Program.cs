@@ -46,8 +46,6 @@ app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
 app.UsePresentation();
-
-
 DbInitialize.Initialize(app);
 
 app.Run();
